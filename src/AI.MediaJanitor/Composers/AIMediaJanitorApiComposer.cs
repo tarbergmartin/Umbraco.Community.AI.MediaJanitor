@@ -1,3 +1,4 @@
+using AI.MediaJanitor.Services;
 using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.Controllers;
@@ -16,6 +17,7 @@ namespace AI.MediaJanitor.Composers
     {
         public void Compose(IUmbracoBuilder builder)
         {
+            builder.Services.AddScoped<IMediaImageAnalysisService, MediaImageAnalysisService>();
 
             builder.Services.AddSingleton<IOperationIdHandler, CustomOperationHandler>();
 
