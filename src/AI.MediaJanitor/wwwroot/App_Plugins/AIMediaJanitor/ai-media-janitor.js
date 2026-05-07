@@ -5,7 +5,7 @@ const a = [
     type: "backofficeEntryPoint",
     js: () => import("./entrypoint-BSlTz4-p.js")
   }
-], t = [
+], i = [
   {
     name: "AIMedia Janitor Dashboard",
     alias: "AI.MediaJanitor.Dashboard",
@@ -21,12 +21,28 @@ const a = [
         match: "Umb.Section.Content"
       }
     ]
+  },
+  {
+    name: "Media Janitor Dashboard",
+    alias: "AI.MediaJanitor.MediaDashboard",
+    type: "dashboard",
+    js: () => import("./media-janitor-dashboard.element-D0I6xojw.js"),
+    meta: {
+      label: "Media Janitor",
+      pathname: "media-janitor"
+    },
+    conditions: [
+      {
+        alias: "Umb.Condition.SectionAlias",
+        match: "Umb.Section.Media"
+      }
+    ]
   }
-], i = [
+], t = [
   ...a,
-  ...t
+  ...i
 ];
 export {
-  i as manifests
+  t as manifests
 };
 //# sourceMappingURL=ai-media-janitor.js.map
