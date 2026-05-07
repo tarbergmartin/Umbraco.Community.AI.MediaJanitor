@@ -10,7 +10,7 @@ const a = [
     name: "AIMedia Janitor Dashboard",
     alias: "AI.MediaJanitor.Dashboard",
     type: "dashboard",
-    js: () => import("./dashboard.element-EN-OiNz5.js"),
+    js: () => import("./dashboard.element-DdCwMsqk.js"),
     meta: {
       label: "Example Dashboard",
       pathname: "example-dashboard"
@@ -26,7 +26,7 @@ const a = [
     name: "Media Janitor Dashboard",
     alias: "AI.MediaJanitor.MediaDashboard",
     type: "dashboard",
-    js: () => import("./media-janitor-dashboard.element-D0I6xojw.js"),
+    js: () => import("./media-janitor-dashboard.element-B7yo3QDB.js"),
     meta: {
       label: "Media Janitor",
       pathname: "media-janitor"

@@ -2,7 +2,7 @@
 
 import type { Client, Options as Options2, TDataShape } from './client';
 import { client } from './client.gen';
-import type { PingData, PingErrors, PingResponses, WhatsMyNameData, WhatsMyNameErrors, WhatsMyNameResponses, WhatsTheTimeMrWolfData, WhatsTheTimeMrWolfErrors, WhatsTheTimeMrWolfResponses, WhoAmIData, WhoAmIErrors, WhoAmIResponses } from './types.gen';
+import type { AnalyzeMediaData, AnalyzeMediaErrors, AnalyzeMediaResponses, PingData, PingErrors, PingResponses, WhatsMyNameData, WhatsMyNameErrors, WhatsMyNameResponses, WhatsTheTimeMrWolfData, WhatsTheTimeMrWolfErrors, WhatsTheTimeMrWolfResponses, WhoAmIData, WhoAmIErrors, WhoAmIResponses } from './types.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean> = Options2<TData, ThrowOnError> & {
     /**
@@ -19,6 +19,19 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
 };
 
 export class AIMediaJanitorService {
+    public static analyzeMedia<ThrowOnError extends boolean = false>(options: Options<AnalyzeMediaData, ThrowOnError>) {
+        return (options?.client ?? client).post<AnalyzeMediaResponses, AnalyzeMediaErrors, ThrowOnError>({
+            security: [
+                {
+                    scheme: 'bearer',
+                    type: 'http'
+                }
+            ],
+            url: '/umbraco/aimediajanitor/api/v1/media/analyze',
+            ...options
+        });
+    }
+
     public static ping<ThrowOnError extends boolean = false>(options?: Options<PingData, ThrowOnError>) {
         return (options?.client ?? client).get<PingResponses, PingErrors, ThrowOnError>({
             security: [
