@@ -173,6 +173,48 @@ export type UserModelWritable = {
     kind: UserKindModel;
 };
 
+export type MediaAnalysisSuggestionsModel = {
+    suggestedName: string;
+    altText: string;
+    caption?: string | null;
+    suggestedFolder?: string | null;
+};
+
+export type AnalyzeMediaRequestModel = {
+    mediaKey: string;
+};
+
+export type AnalyzeMediaData = {
+    body: AnalyzeMediaRequestModel;
+    path?: never;
+    query?: never;
+    url: '/umbraco/aimediajanitor/api/v1/media/analyze';
+};
+
+export type AnalyzeMediaErrors = {
+    /**
+     * The media item is not a supported image type
+     */
+    400: unknown;
+    /**
+     * The resource is protected and requires an authentication token
+     */
+    401: unknown;
+    /**
+     * Media item not found
+     */
+    404: unknown;
+};
+
+export type AnalyzeMediaResponses = {
+    /**
+     * OK
+     */
+    200: MediaAnalysisSuggestionsModel;
+};
+
+export type AnalyzeMediaResponse = AnalyzeMediaResponses[keyof AnalyzeMediaResponses];
+
 export type PingData = {
     body?: never;
     path?: never;

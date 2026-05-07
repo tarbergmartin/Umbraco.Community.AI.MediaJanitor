@@ -15,4 +15,20 @@ export const manifests: Array<UmbExtensionManifest> = [
       },
     ],
   },
+  {
+    name: "Media Janitor Dashboard",
+    alias: "AI.MediaJanitor.MediaDashboard",
+    type: "dashboard",
+    js: () => import("./media-janitor-dashboard.element.js"),
+    meta: {
+      label: "Media Janitor",
+      pathname: "media-janitor",
+    },
+    conditions: [
+      {
+        alias: "Umb.Condition.SectionAlias",
+        match: "Umb.Section.Media",
+      },
+    ],
+  },
 ];

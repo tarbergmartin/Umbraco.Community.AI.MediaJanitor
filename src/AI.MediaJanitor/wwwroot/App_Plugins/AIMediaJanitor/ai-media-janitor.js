@@ -5,12 +5,12 @@ const a = [
     type: "backofficeEntryPoint",
     js: () => import("./entrypoint-BSlTz4-p.js")
   }
-], t = [
+], i = [
   {
     name: "AIMedia Janitor Dashboard",
     alias: "AI.MediaJanitor.Dashboard",
     type: "dashboard",
-    js: () => import("./dashboard.element-EN-OiNz5.js"),
+    js: () => import("./dashboard.element-DdCwMsqk.js"),
     meta: {
       label: "Example Dashboard",
       pathname: "example-dashboard"
@@ -21,12 +21,28 @@ const a = [
         match: "Umb.Section.Content"
       }
     ]
+  },
+  {
+    name: "Media Janitor Dashboard",
+    alias: "AI.MediaJanitor.MediaDashboard",
+    type: "dashboard",
+    js: () => import("./media-janitor-dashboard.element-B7yo3QDB.js"),
+    meta: {
+      label: "Media Janitor",
+      pathname: "media-janitor"
+    },
+    conditions: [
+      {
+        alias: "Umb.Condition.SectionAlias",
+        match: "Umb.Section.Media"
+      }
+    ]
   }
-], i = [
+], t = [
   ...a,
-  ...t
+  ...i
 ];
 export {
-  i as manifests
+  t as manifests
 };
 //# sourceMappingURL=ai-media-janitor.js.map
