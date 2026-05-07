@@ -1,4 +1,4 @@
-@* @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.AuthorList>
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.AuthorList>
 
 @using Clean.Core.Models.ViewModels
 @using ContentModels = Umbraco.Cms.Web.Common.PublishedModels
@@ -9,4 +9,4 @@
 
 @await Html.PartialAsync("~/Views/Partials/pageHeader.cshtml", new PageHeaderViewModel(Model.Name, Model.Title, Model.Subtitle, Model.MainImage))
 
-@await Html.PartialAsync("~/Views/Partials/authors.cshtml") *@
+@await Html.PartialAsync("~/Views/Partials/authors.cshtml")
