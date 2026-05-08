@@ -1,32 +1,15 @@
-const t = [
+const a = [
   {
     name: "AIMedia Janitor Entrypoint",
     alias: "AI.MediaJanitor.Entrypoint",
     type: "backofficeEntryPoint",
     js: () => import("./entrypoint-BSlTz4-p.js")
   }
-], s = [
-  {
-    name: "AIMedia Janitor Dashboard",
-    alias: "AI.MediaJanitor.Dashboard",
-    type: "dashboard",
-    js: () => import("./dashboard.element-BgkgedLO.js"),
-    meta: {
-      label: "Example Dashboard",
-      pathname: "example-dashboard"
-    },
-    conditions: [
-      {
-        alias: "Umb.Condition.SectionAlias",
-        match: "Umb.Section.Content"
-      }
-    ]
-  }
-], i = "AI.MediaJanitor.Workspace.Assistant", n = "AI.MediaJanitor.MenuItem.Assistant", a = "ai-media-assistant", e = "Umb.Menu.Media", o = "Umb.Section.Media", A = [
+], s = [], n = "AI.MediaJanitor.Workspace.Assistant", i = "AI.MediaJanitor.MenuItem.Assistant", t = "ai-media-assistant", e = "Umb.Menu.Media", o = "Umb.Section.Media", A = [
   {
     type: "menuItem",
     kind: "link",
-    alias: n,
+    alias: i,
     name: "AI Media Assistant Menu Item",
     weight: 50,
     // place after the built-in Media tree (1000) / Recycle Bin (900)
@@ -34,19 +17,19 @@ const t = [
       label: "AI Media Assistant",
       icon: "icon-wand",
       menus: [e],
-      href: `/section/media/dashboard/${a}`
+      href: `/section/media/dashboard/${t}`
     }
   }
-], d = [
+], m = [
   {
     type: "dashboard",
-    alias: i,
+    alias: n,
     name: "AI Media Assistant Dashboard",
-    js: () => import("./workspace.element-CLX_2k5-.js"),
+    js: () => import("./workspace.element-CgfUwEh0.js"),
     weight: 100,
     meta: {
       label: "AI Media Assistant",
-      pathname: a
+      pathname: t
     },
     conditions: [
       {
@@ -55,15 +38,15 @@ const t = [
       }
     ]
   }
-], m = [
+], d = [
   ...A,
-  ...d
-], c = [
-  ...t,
-  ...s,
   ...m
+], I = [
+  ...a,
+  ...s,
+  ...d
 ];
 export {
-  c as manifests
+  I as manifests
 };
 //# sourceMappingURL=ai-media-janitor.js.map

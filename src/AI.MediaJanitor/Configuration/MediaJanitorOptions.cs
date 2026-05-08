@@ -40,4 +40,16 @@ public class MediaJanitorOptions
     /// Maximum candidates returned per page from the candidates endpoint.
     /// </summary>
     public int MaxPageSize { get; set; } = 50;
+
+    /// <summary>
+    /// Optional Umbraco.AI Profile alias to route analysis through. When null
+    /// or empty the default profile is used.
+    /// </summary>
+    public string? ProfileAlias { get; set; }
+
+    /// <summary>
+    /// Telemetry / auditing label passed to <c>AIChatBuilder.WithAlias</c>.
+    /// Required by Umbraco.AI even when no profile is selected.
+    /// </summary>
+    public string ChatAlias { get; set; } = "media-janitor";
 }

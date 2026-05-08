@@ -7,7 +7,10 @@
       "Bash(dotnet build *)",
       "Bash(npx tsc *)",
       "WebFetch(domain:docs.umbraco.com)",
-      "Bash(npm run *)"
+      "Bash(npm run *)",
+      "Bash(Get-ChildItem *)",
+      "PowerShell(Get-ChildItem *)",
+      "WebSearch"
     ]
   }
 }

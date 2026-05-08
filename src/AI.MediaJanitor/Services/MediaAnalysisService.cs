@@ -3,9 +3,9 @@ using System.Text.Json;
 using AI.MediaJanitor.Configuration;
 using AI.MediaJanitor.Models;
 using Microsoft.Extensions.AI;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Umbraco.AI.Core.Chat;
 using Umbraco.Cms.Core.IO;
 using Umbraco.Cms.Core.PropertyEditors.ValueConverters;
 using Umbraco.Cms.Core.Services;
@@ -31,23 +31,20 @@ public class MediaAnalysisService : IMediaAnalysisService
         }
         """;
 
-    // We resolve IChatClient lazily so the package boots even when no AI
-    // provider is configured. The editor only sees the friendly error when
-    // they actually click "Analyse".
-    private readonly IServiceProvider _services;
+    private readonly IAIChatService _chatService;
     private readonly IMediaService _mediaService;
     private readonly MediaFileManager _mediaFileManager;
     private readonly MediaJanitorOptions _options;
     private readonly ILogger<MediaAnalysisService> _logger;
 
     public MediaAnalysisService(
-        IServiceProvider services,
+        IAIChatService chatService,
         IMediaService mediaService,
         MediaFileManager mediaFileManager,
         IOptions<MediaJanitorOptions> options,
         ILogger<MediaAnalysisService> logger)
     {
-        _services = services;
+        _chatService = chatService;
         _mediaService = mediaService;
         _mediaFileManager = mediaFileManager;
         _options = options.Value;
@@ -58,11 +55,31 @@ public class MediaAnalysisService : IMediaAnalysisService
         MediaAnalysisRequest request,
         CancellationToken ct)
     {
-        var chat = _services.GetService<IChatClient>()
-            ?? throw new InvalidOperationException(
-                "No IChatClient is registered. Install one of the Umbraco.AI provider packages " +
-                "(e.g. Umbraco.AI.OpenAI, Umbraco.AI.Anthropic, Umbraco.AI.Google) on the host site " +
-                "and configure it in appsettings.json before using the AI Media Assistant.");
+        IChatClient chat;
+        try
+        {
+            chat = await _chatService.CreateChatClientAsync(
+                builder =>
+                {
+                    builder.WithAlias(_options.ChatAlias);
+                    if (!string.IsNullOrWhiteSpace(_options.ProfileAlias))
+                    {
+                        builder.WithProfile(_options.ProfileAlias!);
+                    }
+                },
+                ct);
+        }
+        catch (Exception ex)
+        {
+            // Umbraco.AI throws when no Connection or matching Profile exists.
+            // Surface a friendly message that points the editor at the AI UI.
+            _logger.LogWarning(ex, "Could not obtain chat client from Umbraco.AI.");
+            throw new InvalidOperationException(
+                "AI Media Assistant could not obtain a chat client. " +
+                "Open the Umbraco backoffice → AI → Connections and create a connection " +
+                "(e.g. OpenAI). If you set Umbraco:CMS:AIMediaJanitor:ProfileAlias in " +
+                "appsettings.json, make sure a profile with that alias exists.", ex);
+        }
 
         var media = _mediaService.GetById(request.MediaKey)
             ?? throw new InvalidOperationException($"Media {request.MediaKey} not found.");

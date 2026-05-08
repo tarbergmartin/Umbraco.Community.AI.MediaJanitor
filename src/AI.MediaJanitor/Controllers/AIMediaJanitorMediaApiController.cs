@@ -14,9 +14,6 @@ namespace AI.MediaJanitor.Controllers;
 
 [ApiVersion("1.0")]
 [ApiExplorerSettings(GroupName = "AI.MediaJanitor")]
-//[VersionedApiBackOfficeRoute("aimediajanitor/media")]
-//[Authorize(Policy = AuthorizationPolicies.SectionAccessMedia)]
-//[MapToApi(Constants.ApiName)]
 public class AIMediaJanitorMediaApiController : AIMediaJanitorApiControllerBase
 {
     private readonly IMediaCandidateService _candidates;
