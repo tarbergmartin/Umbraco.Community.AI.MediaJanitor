@@ -8,7 +8,7 @@ namespace AI.MediaJanitor.Controllers
 {
     [ApiVersion("1.0")]
     [ApiExplorerSettings(GroupName = "AI.MediaJanitor")]
-    public class AIMediaJanitorApiController : AIMediaJanitorApiControllerBase
+    public class AIMediaJanitorApiController 
     {
         private readonly IBackOfficeSecurityAccessor _backOfficeSecurityAccessor;
 

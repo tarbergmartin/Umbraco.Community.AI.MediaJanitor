@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(umbraco-cms-backoffice-skills:umbraco-menu-items)",
+      "Bash(Get-ChildItem -Filter \"*media*\" -Directory)",
+      "Bash(Select-Object -First 20)",
+      "Bash(dotnet build *)",
+      "Bash(npx tsc *)",
+      "WebFetch(domain:docs.umbraco.com)",
+      "Bash(npm run *)"
+    ]
+  }
+}

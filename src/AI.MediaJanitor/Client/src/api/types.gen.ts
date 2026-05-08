@@ -4,263 +4,135 @@ export type ClientOptions = {
     baseUrl: 'https://localhost:44333' | (string & {});
 };
 
-export type DocumentGranularPermissionModel = {
-    key: string;
-    readonly context: string;
-    permission: string;
+export type ApplySuggestionRequest = {
+    mediaKey: string;
+    name?: string | null;
+    altText?: string | null;
+    caption?: string | null;
+    targetFolderKey?: string | null;
 };
 
-export type DocumentPropertyValueGranularPermissionModel = {
-    key: string;
-    readonly context: string;
-    permission: string;
+export type ApplySuggestionResult = {
+    mediaKey: string;
+    success: boolean;
+    appliedFields?: Array<string> | null;
+    errorMessage?: string | null;
 };
 
-export type ReadOnlyUserGroupModel = {
-    id: number;
+export type CandidatePage = {
+    items: Array<MediaCandidate>;
+    total: number;
+};
+
+export type FolderSuggestion = {
+    name?: string | null;
+    category?: string | null;
+};
+
+export type MediaAnalysisRequest = {
+    mediaKey: string;
+    language?: string | null;
+};
+
+export type MediaAnalysisSuggestion = {
+    mediaKey: string;
+    name?: string | null;
+    altText?: string | null;
+    caption?: string | null;
+    folder?: FolderSuggestion | null;
+    uncertain: boolean;
+    note?: string | null;
+};
+
+export type MediaCandidate = {
     key: string;
     name: string;
-    readonly description?: string | null;
-    icon?: string | null;
-    startContentId?: number | null;
-    startMediaId?: number | null;
-    alias: string;
-    hasAccessToAllLanguages: boolean;
-    allowedLanguages: Array<number>;
-    permissions: Array<string>;
-    granularPermissions: Array<DocumentGranularPermissionModel | DocumentPropertyValueGranularPermissionModel | UnknownTypeGranularPermissionModel>;
-    allowedSections: Array<string>;
+    currentAltText?: string | null;
+    folderPath?: string | null;
+    thumbnailUrl?: string | null;
+    mediaTypeAlias?: string | null;
+    missingAlt: boolean;
+    poorName: boolean;
 };
 
-export type UnknownTypeGranularPermissionModel = {
-    context: string;
-    permission: string;
-};
-
-export type UserGroupModel = {
-    id: number;
-    key: string;
-    createDate: string;
-    updateDate: string;
-    deleteDate?: string | null;
-    readonly hasIdentity: boolean;
-    startMediaId?: number | null;
-    startContentId?: number | null;
-    icon?: string | null;
-    alias: string;
-    name?: string | null;
-    description?: string | null;
-    hasAccessToAllLanguages: boolean;
-    permissions: Array<string>;
-    granularPermissions: Array<DocumentGranularPermissionModel | DocumentPropertyValueGranularPermissionModel | UnknownTypeGranularPermissionModel>;
-    readonly allowedSections: Array<string>;
-    readonly userCount: number;
-    readonly allowedLanguages: Array<number>;
-};
-
-export type UserKindModel = 'Default' | 'Api';
-
-export type UserModel = {
-    id: number;
-    key: string;
-    createDate: string;
-    updateDate: string;
-    deleteDate?: string | null;
-    readonly hasIdentity: boolean;
-    emailConfirmedDate?: string | null;
-    invitedDate?: string | null;
-    username: string;
-    email: string;
-    rawPasswordValue?: string | null;
-    passwordConfiguration?: string | null;
-    isApproved: boolean;
-    isLockedOut: boolean;
-    lastLoginDate?: string | null;
-    lastPasswordChangeDate?: string | null;
-    lastLockoutDate?: string | null;
-    failedPasswordAttempts: number;
-    comments?: string | null;
-    userState: UserStateModel;
-    name?: string | null;
-    readonly allowedSections: Array<string>;
-    profileData: UserModel | UserProfileModel;
-    securityStamp?: string | null;
-    avatar?: string | null;
-    sessionTimeout: number;
-    startContentIds?: Array<number> | null;
-    startMediaIds?: Array<number> | null;
-    language?: string | null;
-    kind: UserKindModel;
-    readonly groups: Array<ReadOnlyUserGroupModel | UserGroupModel>;
-};
-
-export type UserProfileModel = {
-    id: number;
-    name?: string | null;
-};
-
-export type UserStateModel = 'Active' | 'Disabled' | 'LockedOut' | 'Invited' | 'Inactive' | 'All';
-
-export type DocumentGranularPermissionModelWritable = {
-    key: string;
-    permission: string;
-};
-
-export type DocumentPropertyValueGranularPermissionModelWritable = {
-    key: string;
-    permission: string;
-};
-
-export type ReadOnlyUserGroupModelWritable = {
-    id: number;
-    key: string;
-    name: string;
-    icon?: string | null;
-    startContentId?: number | null;
-    startMediaId?: number | null;
-    alias: string;
-    hasAccessToAllLanguages: boolean;
-    allowedLanguages: Array<number>;
-    permissions: Array<string>;
-    granularPermissions: Array<DocumentGranularPermissionModelWritable | DocumentPropertyValueGranularPermissionModelWritable | UnknownTypeGranularPermissionModel>;
-    allowedSections: Array<string>;
-};
-
-export type UserGroupModelWritable = {
-    id: number;
-    key: string;
-    createDate: string;
-    updateDate: string;
-    deleteDate?: string | null;
-    startMediaId?: number | null;
-    startContentId?: number | null;
-    icon?: string | null;
-    alias: string;
-    name?: string | null;
-    description?: string | null;
-    hasAccessToAllLanguages: boolean;
-    permissions: Array<string>;
-    granularPermissions: Array<DocumentGranularPermissionModelWritable | DocumentPropertyValueGranularPermissionModelWritable | UnknownTypeGranularPermissionModel>;
-};
-
-export type UserModelWritable = {
-    id: number;
-    key: string;
-    createDate: string;
-    updateDate: string;
-    deleteDate?: string | null;
-    emailConfirmedDate?: string | null;
-    invitedDate?: string | null;
-    username: string;
-    email: string;
-    rawPasswordValue?: string | null;
-    passwordConfiguration?: string | null;
-    isApproved: boolean;
-    isLockedOut: boolean;
-    lastLoginDate?: string | null;
-    lastPasswordChangeDate?: string | null;
-    lastLockoutDate?: string | null;
-    failedPasswordAttempts: number;
-    comments?: string | null;
-    userState: UserStateModel;
-    name?: string | null;
-    securityStamp?: string | null;
-    avatar?: string | null;
-    sessionTimeout: number;
-    startContentIds?: Array<number> | null;
-    startMediaIds?: Array<number> | null;
-    language?: string | null;
-    kind: UserKindModel;
-};
-
-export type PingData = {
-    body?: never;
+export type AnalyzeData = {
+    body?: MediaAnalysisRequest;
     path?: never;
     query?: never;
-    url: '/umbraco/aimediajanitor/api/v1/ping';
+    url: '/umbraco/aimediajanitor/api/v1/analyze';
 };
 
-export type PingErrors = {
+export type AnalyzeErrors = {
+    /**
+     * Bad Request
+     */
+    400: unknown;
     /**
      * The resource is protected and requires an authentication token
      */
     401: unknown;
 };
 
-export type PingResponses = {
+export type AnalyzeResponses = {
     /**
      * OK
      */
-    200: string;
+    200: MediaAnalysisSuggestion;
 };
 
-export type PingResponse = PingResponses[keyof PingResponses];
+export type AnalyzeResponse = AnalyzeResponses[keyof AnalyzeResponses];
 
-export type WhatsMyNameData = {
-    body?: never;
+export type ApplyData = {
+    body?: ApplySuggestionRequest;
     path?: never;
     query?: never;
-    url: '/umbraco/aimediajanitor/api/v1/whatsMyName';
+    url: '/umbraco/aimediajanitor/api/v1/apply';
 };
 
-export type WhatsMyNameErrors = {
+export type ApplyErrors = {
+    /**
+     * Bad Request
+     */
+    400: unknown;
     /**
      * The resource is protected and requires an authentication token
      */
     401: unknown;
 };
 
-export type WhatsMyNameResponses = {
+export type ApplyResponses = {
     /**
      * OK
      */
-    200: string;
+    200: ApplySuggestionResult;
 };
 
-export type WhatsMyNameResponse = WhatsMyNameResponses[keyof WhatsMyNameResponses];
+export type ApplyResponse = ApplyResponses[keyof ApplyResponses];
 
-export type WhatsTheTimeMrWolfData = {
+export type GetCandidatesData = {
     body?: never;
     path?: never;
-    query?: never;
-    url: '/umbraco/aimediajanitor/api/v1/whatsTheTimeMrWolf';
+    query?: {
+        missingAlt?: boolean;
+        poorName?: boolean;
+        skip?: number;
+        take?: number;
+    };
+    url: '/umbraco/aimediajanitor/api/v1/candidates';
 };
 
-export type WhatsTheTimeMrWolfErrors = {
+export type GetCandidatesErrors = {
     /**
      * The resource is protected and requires an authentication token
      */
     401: unknown;
 };
 
-export type WhatsTheTimeMrWolfResponses = {
+export type GetCandidatesResponses = {
     /**
      * OK
      */
-    200: string;
+    200: CandidatePage;
 };
 
-export type WhatsTheTimeMrWolfResponse = WhatsTheTimeMrWolfResponses[keyof WhatsTheTimeMrWolfResponses];
-
-export type WhoAmIData = {
-    body?: never;
-    path?: never;
-    query?: never;
-    url: '/umbraco/aimediajanitor/api/v1/whoAmI';
-};
-
-export type WhoAmIErrors = {
-    /**
-     * The resource is protected and requires an authentication token
-     */
-    401: unknown;
-};
-
-export type WhoAmIResponses = {
-    /**
-     * OK
-     */
-    200: UserModel;
-};
-
-export type WhoAmIResponse = WhoAmIResponses[keyof WhoAmIResponses];
+export type GetCandidatesResponse = GetCandidatesResponses[keyof GetCandidatesResponses];

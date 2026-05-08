@@ -12,4 +12,11 @@
     <PackageVersion Include="Umbraco.Cms.Web.Common" Version="17.3.5" />
     <PackageVersion Include="Umbraco.Cms.Web.Website" Version="17.3.5" />
   </ItemGroup>
+
+  <ItemGroup>
+    <!-- AI abstractions. The concrete IChatClient is provided by the host site
+         (e.g. via Umbraco.AI.OpenAI, Umbraco.AI.Anthropic, ...). -->
+    <PackageVersion Include="Microsoft.Extensions.AI" Version="9.10.0" />
+    <PackageVersion Include="Microsoft.Extensions.AI.Abstractions" Version="9.10.0" />
+  </ItemGroup>
 </Project>

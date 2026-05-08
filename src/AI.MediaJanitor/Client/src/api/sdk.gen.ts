@@ -2,7 +2,7 @@
 
 import type { Client, Options as Options2, TDataShape } from './client';
 import { client } from './client.gen';
-import type { PingData, PingErrors, PingResponses, WhatsMyNameData, WhatsMyNameErrors, WhatsMyNameResponses, WhatsTheTimeMrWolfData, WhatsTheTimeMrWolfErrors, WhatsTheTimeMrWolfResponses, WhoAmIData, WhoAmIErrors, WhoAmIResponses } from './types.gen';
+import type { AnalyzeData, AnalyzeErrors, AnalyzeResponses, ApplyData, ApplyErrors, ApplyResponses, GetCandidatesData, GetCandidatesErrors, GetCandidatesResponses } from './types.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean> = Options2<TData, ThrowOnError> & {
     /**
@@ -18,55 +18,50 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
     meta?: Record<string, unknown>;
 };
 
-export class AIMediaJanitorService {
-    public static ping<ThrowOnError extends boolean = false>(options?: Options<PingData, ThrowOnError>) {
-        return (options?.client ?? client).get<PingResponses, PingErrors, ThrowOnError>({
+export class AiMediaJanitorService {
+    public static analyze<ThrowOnError extends boolean = false>(options?: Options<AnalyzeData, ThrowOnError>) {
+        return (options?.client ?? client).post<AnalyzeResponses, AnalyzeErrors, ThrowOnError>({
             security: [
                 {
                     scheme: 'bearer',
                     type: 'http'
                 }
             ],
-            url: '/umbraco/aimediajanitor/api/v1/ping',
-            ...options
+            url: '/umbraco/aimediajanitor/api/v1/analyze',
+            ...options,
+            headers: {
+                'Content-Type': 'application/json',
+                ...options?.headers
+            }
         });
     }
     
-    public static whatsMyName<ThrowOnError extends boolean = false>(options?: Options<WhatsMyNameData, ThrowOnError>) {
-        return (options?.client ?? client).get<WhatsMyNameResponses, WhatsMyNameErrors, ThrowOnError>({
+    public static apply<ThrowOnError extends boolean = false>(options?: Options<ApplyData, ThrowOnError>) {
+        return (options?.client ?? client).post<ApplyResponses, ApplyErrors, ThrowOnError>({
             security: [
                 {
                     scheme: 'bearer',
                     type: 'http'
                 }
             ],
-            url: '/umbraco/aimediajanitor/api/v1/whatsMyName',
-            ...options
+            url: '/umbraco/aimediajanitor/api/v1/apply',
+            ...options,
+            headers: {
+                'Content-Type': 'application/json',
+                ...options?.headers
+            }
         });
     }
     
-    public static whatsTheTimeMrWolf<ThrowOnError extends boolean = false>(options?: Options<WhatsTheTimeMrWolfData, ThrowOnError>) {
-        return (options?.client ?? client).get<WhatsTheTimeMrWolfResponses, WhatsTheTimeMrWolfErrors, ThrowOnError>({
+    public static getCandidates<ThrowOnError extends boolean = false>(options?: Options<GetCandidatesData, ThrowOnError>) {
+        return (options?.client ?? client).get<GetCandidatesResponses, GetCandidatesErrors, ThrowOnError>({
             security: [
                 {
                     scheme: 'bearer',
                     type: 'http'
                 }
             ],
-            url: '/umbraco/aimediajanitor/api/v1/whatsTheTimeMrWolf',
-            ...options
-        });
-    }
-    
-    public static whoAmI<ThrowOnError extends boolean = false>(options?: Options<WhoAmIData, ThrowOnError>) {
-        return (options?.client ?? client).get<WhoAmIResponses, WhoAmIErrors, ThrowOnError>({
-            security: [
-                {
-                    scheme: 'bearer',
-                    type: 'http'
-                }
-            ],
-            url: '/umbraco/aimediajanitor/api/v1/whoAmI',
+            url: '/umbraco/aimediajanitor/api/v1/candidates',
             ...options
         });
     }
